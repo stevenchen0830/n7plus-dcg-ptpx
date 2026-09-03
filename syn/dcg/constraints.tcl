@@ -10,7 +10,16 @@
 #
 #  Usable logic time per stage is therefore 0.900 - 0.150 = 0.750 ns minus
 #  clk->q and setup.  See docs/ppa_status.md for the logic-depth budget.
+#
+#  All time values below are written in ns and all loads in pF.  The N7+
+#  .db files use those units; a setup file for libraries in other units
+#  (ASAP7: ps / fF) sets TIME_SCALE / CAP_SCALE before this file is sourced.
 #============================================================================
+if {![info exists TIME_SCALE]} { set TIME_SCALE 1.0 }
+if {![info exists CAP_SCALE]}  { set CAP_SCALE  1.0 }
+proc ns {x} { return [expr {$x * $::TIME_SCALE}] }
+proc pf {x} { return [expr {$x * $::CAP_SCALE}] }
+
 set CLK_PORT          clk
 set CLK_PERIOD        1.000    ;# ns - the 1 GHz of the assignment
 set DCG_MARGIN        0.10     ;# DCG: real synthesis period = 90 % of setting
@@ -26,15 +35,15 @@ if {$APPLY_DCG_MARGIN} {
 } else {
     set SYN_PERIOD $CLK_PERIOD
 }
-puts "INFO: synthesis clock period = $SYN_PERIOD ns (setting $CLK_PERIOD ns, DCG margin $DCG_MARGIN)"
+puts "INFO: synthesis clock period = $SYN_PERIOD ns (setting $CLK_PERIOD ns, DCG margin $DCG_MARGIN, library time scale $TIME_SCALE)"
 
-create_clock -name clk -period $SYN_PERIOD [get_ports $CLK_PORT]
-set_clock_uncertainty -setup $SETUP_UNC [get_clocks clk]
-set_clock_transition  0.040 [get_clocks clk]
+create_clock -name clk -period [ns $SYN_PERIOD] [get_ports $CLK_PORT]
+set_clock_uncertainty -setup [ns $SETUP_UNC] [get_clocks clk]
+set_clock_transition  [ns 0.040] [get_clocks clk]
 set_dont_touch_network [get_clocks clk]
 # ICG check margin: the 0.100 ns is added ON TOP of the clock uncertainty
 # (the stricter reading of the "ICG additional setup uncertainty" table).
-set_clock_gating_check -setup $ICG_SETUP_UNC [get_clocks clk]
+set_clock_gating_check -setup [ns $ICG_SETUP_UNC] [get_clocks clk]
 
 # rst_n is asynchronous and released by an external synchronizer (spec:
 # released synchronously outside the module), so recovery / removal timing
@@ -49,8 +58,8 @@ set_ideal_network [get_ports rst_n]
 # violations on those direct paths.  The SRAM side models a single-port
 # macro: clk->q on mem_rdata, setup on ce / we / addr / wdata.
 # ---------------------------------------------------------------------------
-set IN_DELAY_STREAM   [expr {0.50 * $SYN_PERIOD}]   ;# producer launches mid-cycle
-set OUT_DELAY_STREAM  [expr {0.50 * $SYN_PERIOD}]   ;# consumer setup budget
+set IN_DELAY_STREAM   [expr {0.50 * $SYN_PERIOD}]   ;# ns, producer launches mid-cycle
+set OUT_DELAY_STREAM  [expr {0.50 * $SYN_PERIOD}]   ;# ns, consumer setup budget
 set SRAM_CLK_TO_Q     0.450                          ;# ns, N7-class single-port SRAM
 set SRAM_SETUP        0.200                          ;# ns, SRAM input setup
 
@@ -60,24 +69,26 @@ set stream_outs [get_ports {in_pix_need out_pix_rdy out_pix_data*}]
 set mem_ins     [get_ports mem_rdata*]
 set mem_outs    [get_ports {mem_ce* mem_we* mem_addr* mem_wdata*}]
 
-set_input_delay  -clock clk -max $IN_DELAY_STREAM  $stream_ins
-set_input_delay  -clock clk -min 0.0               $stream_ins
-set_output_delay -clock clk -max $OUT_DELAY_STREAM $stream_outs
-set_output_delay -clock clk -min 0.0               $stream_outs
-set_input_delay  -clock clk -max $SRAM_CLK_TO_Q    $mem_ins
-set_input_delay  -clock clk -min 0.0               $mem_ins
-set_output_delay -clock clk -max $SRAM_SETUP       $mem_outs
-set_output_delay -clock clk -min 0.0               $mem_outs
+set_input_delay  -clock clk -max [ns $IN_DELAY_STREAM]  $stream_ins
+set_input_delay  -clock clk -min 0.0                    $stream_ins
+set_output_delay -clock clk -max [ns $OUT_DELAY_STREAM] $stream_outs
+set_output_delay -clock clk -min 0.0                    $stream_outs
+set_input_delay  -clock clk -max [ns $SRAM_CLK_TO_Q]    $mem_ins
+set_input_delay  -clock clk -min 0.0                    $mem_ins
+set_output_delay -clock clk -max [ns $SRAM_SETUP]       $mem_outs
+set_output_delay -clock clk -min 0.0                    $mem_outs
 
-# electrical environment (driving cell name follows the site library)
-set DRIVING_CELL BUFFD4BWP240H8P51PDULVT
+# electrical environment (driving cell name follows the site library; the
+# setup file may pre-set DRIVING_CELL)
+if {![info exists DRIVING_CELL]} { set DRIVING_CELL BUFFD4BWP240H8P51PDULVT }
+set data_ins [remove_from_collection [all_inputs] [get_ports $CLK_PORT]]
 if {[llength [get_lib_cells -quiet */$DRIVING_CELL]] > 0} {
-    set_driving_cell -lib_cell $DRIVING_CELL -no_design_rule \
-        [remove_from_collection [all_inputs] [get_ports $CLK_PORT]]
+    set_driving_cell -lib_cell $DRIVING_CELL -no_design_rule $data_ins
 } else {
-    set_input_transition 0.050 [remove_from_collection [all_inputs] [get_ports $CLK_PORT]]
+    puts "WARNING: driving cell $DRIVING_CELL not in the library - using set_input_transition"
+    set_input_transition [ns 0.050] $data_ins
 }
-set_load 0.003 [all_outputs]                          ;# pF, next-stage flop + short wire
-set_max_transition 0.150 [current_design]
-set_max_fanout     32    [current_design]
+set_load [pf 0.003] [all_outputs]                     ;# next-stage flop + short wire
+set_max_transition [ns 0.150] [current_design]
+set_max_fanout     32         [current_design]
 set_max_area 0

@@ -19,7 +19,13 @@ set NETLIST ../dcg/outputs/${DESIGN}.dcg.v
 set SDC     ../dcg/outputs/${DESIGN}.dcg.sdc
 set STRIP   img_filter_tb/u_dut          ;# testbench instance path in the VCD
 
-source ../dcg/setup.tcl
+# same library setup as the DCG run (DCG_SETUP=./setup_asap7.tcl for the
+# open-library shakedown; the file name is taken relative to ../dcg)
+if {[info exists ::env(DCG_SETUP)]} {
+    source ../dcg/[file tail $::env(DCG_SETUP)]
+} else {
+    source ../dcg/setup.tcl
+}
 sh mkdir -p reports
 
 set_app_var power_enable_analysis   true

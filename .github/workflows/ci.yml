@@ -11,7 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install open-source tools
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq iverilog verilator yosys
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq iverilog verilator yosys tcl
+      - name: DC / PT flow scripts executed under tclsh (stubbed tool commands)
+        run: sh syn/check_scripts.sh
       - name: Reference model (executable spec + architecture cross-check)
         run: python3 verification/reference_model.py
       - name: Icarus smoke regression (13 frames)

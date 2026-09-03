@@ -29,3 +29,11 @@
     26x24   blk_v=25 gap= 0/0  :    275 cyc (ideal   168), rd=   3024 wr=   168, 1st out +106
     32x49   blk_v=25 gap=15/35 :    762 cyc (ideal   392), rd=   8256 wr=   392, 1st out +136
     27x24   blk_v=27 gap= 0/0  :    282 cyc (ideal   168), rd=   3185 wr=   168, 1st out +113
+    32x52   blk_v=27 gap=29/17 :    764 cyc (ideal   416), rd=   9464 wr=   416, 1st out +178
+    28x24   blk_v=29 gap= 0/0  :    289 cyc (ideal   168), rd=   3332 wr=   168, 1st out +121
+    32x55   blk_v=29 gap= 3/39 :    883 cyc (ideal   440), rd=  10752 wr=   440, 1st out +135
+    24x24   blk_v=31 gap= 0/0  :    257 cyc (ideal   144), rd=   2970 wr=   144, 1st out +113
+    32x58   blk_v=31 gap=17/21 :    818 cyc (ideal   464), rd=  12120 wr=   464, 1st out +169
+    25x24   blk_v=33 gap= 0/0  :    303 cyc (ideal   168), rd=   3472 wr=   168, 1st out +134
+    32x49   blk_v=33 gap=31/3  :    690 cyc (ideal   392), rd=  10496 wr=   392, 1st out +206
+    26x24   blk_v=35 gap= 0/0  :    310 cyc (ideal   168), rd=   3689 wr=   168, 1st out +141

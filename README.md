@@ -76,7 +76,13 @@ lane 与系数无效字节注入 X、20000 拍无握手监视、首拍延时与 
 
 ```sh
 N7P_PDK_ROOT=/path/to/n7p sh syn/run_all.sh     # 在有 dc_shell / pt_shell 的机器上
+sh syn/check_scripts.sh                          # 无工具：tclsh 桩环境把全部流程脚本执行一遍
 ```
+
+有 DC 但没有 N7+ 库的机器可以先用开源 ASAP7 库把脚本跑通（`DCG_SETUP=./setup_asap7.tcl`，
+数字不可用于评分）；若官方 DCG 报负 slack，有两级兜底：流程级 `DCG_RETIME_MAC=1`
+（只重定时 MAC 流水寄存器）和 RTL 级 [`mac4` 分支](../../tree/mac4)（四级 MAC）。
+细节与容忍度计算见 [syn/README.md](syn/README.md)。
 
 **为什么不能用上一仓库的 1 GHz 结果代替**：那是 ASAP7 预测性 PDK + OpenROAD 在快角
 （FF）下、100 ps uncertainty 的收敛；同一网表在 ASAP7 慢角只有约 520 MHz。

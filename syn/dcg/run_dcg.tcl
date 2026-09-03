@@ -3,6 +3,14 @@
 #
 #  usage:  dc_shell -topographical -f run_dcg.tcl | tee dcg.log
 #
+#  environment knobs:
+#    DCG_SETUP=./setup_asap7.tcl  library setup file (default ./setup.tcl,
+#                                 the N7+ site setup; setup_asap7.tcl is
+#                                 the open-library script shakedown)
+#    DCG_RETIME_MAC=1             flow-level timing fallback: let
+#                                 compile_ultra -retime move only the MAC
+#                                 pipeline registers into the arithmetic
+#
 #  Produces in ./reports:
 #     qor.rpt          - Critical Path Slack / TNS / cell area (Ax)
 #     timing.rpt       - worst paths, input pins, transitions
@@ -18,7 +26,11 @@
 set DESIGN   IMG_FILTER
 set RTL_DIR  ../../rtl
 
-source ./setup.tcl
+if {[info exists ::env(DCG_SETUP)]} {
+    source $::env(DCG_SETUP)
+} else {
+    source ./setup.tcl
+}
 
 sh mkdir -p work reports outputs
 define_design_lib WORK -path ./work
@@ -33,7 +45,10 @@ uniquify
 check_design > reports/check_design.rpt
 
 # ---- physical setup (topographical mode) ----------------------------------
-if {[shell_is_in_topographical_mode]} {
+# A setup file without physical data (setup_asap7.tcl) sets NO_PHYSICAL_DATA
+# and the flow runs in plain mode even inside a -topographical shell.
+set TOPO [expr {[shell_is_in_topographical_mode] && ![info exists NO_PHYSICAL_DATA]}]
+if {$TOPO} {
     if {[file exists work/${DESIGN}.mw]} { sh rm -rf work/${DESIGN}.mw }
     create_mw_lib -technology $MW_TECH_FILE \
                   -mw_reference_library $MW_REF_LIBS \
@@ -67,9 +82,20 @@ set_clock_gating_style -sequential_cell latch \
                        -max_fanout 64
 
 # ---- compile --------------------------------------------------------------
-# No retiming: REG_IN / REG_OUT registers must stay on the ports.
-compile_ultra -gate_clock -spg -timing_high_effort_script
-compile_ultra -gate_clock -spg -incremental
+set COMPILE_OPTS [list -gate_clock]
+if {$TOPO} { lappend COMPILE_OPTS -spg }
+# Optional MAC retiming (flow-level timing fallback, no RTL change).  Every
+# register is pinned first - REG_IN / REG_OUT ports, control, the weight
+# pipeline - and only the MAC pipeline registers are released, so retiming
+# can move them into the multiply / add trees but nothing else.
+if {[info exists ::env(DCG_RETIME_MAC)] && $::env(DCG_RETIME_MAC)} {
+    set_dont_retime [all_registers] true
+    set_dont_retime [get_cells -hierarchical {pair_q_reg* part_q_reg* prod_q_reg*}] false
+    lappend COMPILE_OPTS -retime
+    puts "INFO: MAC retiming enabled (DCG_RETIME_MAC)"
+}
+eval compile_ultra $COMPILE_OPTS -timing_high_effort_script
+eval compile_ultra $COMPILE_OPTS -incremental
 
 # ---- reports --------------------------------------------------------------
 change_names -rules verilog -hierarchy
@@ -81,7 +107,7 @@ report_area -hierarchy                            > reports/area.rpt
 report_power -hierarchy -verbose                  > reports/power.rpt
 report_clock_gating -gated -ungated               > reports/clock_gating.rpt
 report_resources                                  > reports/resources.rpt
-if {[shell_is_in_topographical_mode]} {
+if {$TOPO} {
     report_congestion                             > reports/congestion.rpt
 }
 # REG_IN / REG_OUT sanity straight from the netlist: every input (except the
