@@ -14,3 +14,9 @@ syn/*/*.log
 # keep committed evidence logs
 !verification/logs/*.log
 !scripts/logs/*.log
+# regenerated Yosys artifacts (multi-MB); the verdict files stay tracked:
+# check_reg_io.log, synth_check_stat.txt, depth_ltp.txt, yosys_versions.txt
+scripts/logs/reg_io.json
+scripts/logs/reg_io.log
+scripts/logs/synth_check.log
+scripts/logs/depth.log

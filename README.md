@@ -51,7 +51,7 @@ docs/                requirements_checklist.md 逐项核对 · ppa_status.md PPA
 | Python 参考模型：题目公式 vs 权重旋转架构，117 组形状×核 | ALL REFERENCE CHECKS PASSED | `verification/logs/reference_model.log` |
 | 分裂旋转器 0…48 全移位量 | 3234 checks / 0 errors | `verification/logs/rotator_tb.log` |
 | REG_IN / REG_OUT 结构检查（Yosys 网表逐位遍历） | PASSED：6 个受约束输入的每一位只到触发器 D 端；`out_pix_data` 160 位全由 Q 端驱动 | `scripts/logs/check_reg_io.log` |
-| 无 latch / 无推断 memory | 断言通过；22,498 个触发器，470,032 个通用门 | `scripts/logs/synth_check.log` |
+| 无 latch / 无推断 memory | 断言通过；22,498 个触发器，470,032 个通用门 | `scripts/logs/synth_check_stat.txt` |
 | 寄存器间逻辑深度 | 28 级通用门（MAC 第一级） | `scripts/logs/depth_ltp.txt` |
 | Verilator lint | 无警告 | `scripts/logs/verilator_lint.log` |
 
