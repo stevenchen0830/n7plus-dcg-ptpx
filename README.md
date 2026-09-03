@@ -44,7 +44,7 @@ docs/                requirements_checklist.md 逐项核对 · ppa_status.md PPA
 | --- | --- | --- |
 | 13 帧 smoke（`+SMOKE`） | 13 帧 / 42,972 次分量比对 / 0 错误 | `verification/logs/smoke.log` |
 | `blk_v` = 27 / 31 / 37 / 45 定向（`+BLKV_GAP`） | 8 帧 / 42,072 次比对 / 0 错误 | `verification/logs/blkv_gap.log` |
-| 全部合法 `blk_v` 1…49，各 2 帧（`+ALL_BLKV`） | 运行中（提交时 27/50 帧完成，0 错误）；完成后日志与掩码随后提交 | `verification/logs/all_blkv.log` |
+| 全部合法 `blk_v` 1…49，各 2 帧（`+ALL_BLKV`） | 50 帧 / 233,024 次比对 / 0 错误，覆盖掩码 `2AAAAAAAAAAAA` | `verification/logs/all_blkv.log` |
 | 完整发布回归（54 帧 + 8 帧 gap，含 1440 宽、4096 高、随机扫描） | 运行中（提交时已完成 4 帧，0 错误；日志随后更新） | `verification/logs/full.log` |
 | 性能 / 功耗用例 A（1440×24，blk_v=5） | 9383 拍，41,760 次 SRAM 访存 | `verification/logs/case_a.log` |
 | 功耗用例 B（1440×24，blk_v=3） | 9023 拍，25,560 次访存 | `verification/logs/case_b.log` |

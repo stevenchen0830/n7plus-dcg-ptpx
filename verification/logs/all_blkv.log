@@ -37,3 +37,24 @@
     25x24   blk_v=33 gap= 0/0  :    303 cyc (ideal   168), rd=   3472 wr=   168, 1st out +134
     32x49   blk_v=33 gap=31/3  :    690 cyc (ideal   392), rd=  10496 wr=   392, 1st out +206
     26x24   blk_v=35 gap= 0/0  :    310 cyc (ideal   168), rd=   3689 wr=   168, 1st out +141
+    32x52   blk_v=35 gap= 5/25 :    730 cyc (ideal   416), rd=  11288 wr=   416, 1st out +162
+    27x24   blk_v=37 gap= 0/0  :    317 cyc (ideal   168), rd=   3780 wr=   168, 1st out +149
+    32x55   blk_v=37 gap=19/7  :    734 cyc (ideal   440), rd=  12672 wr=   440, 1st out +205
+    28x24   blk_v=39 gap= 0/0  :    324 cyc (ideal   168), rd=   3801 wr=   168, 1st out +156
+    32x58   blk_v=39 gap=33/29 :   1000 cyc (ideal   464), rd=  14120 wr=   464, 1st out +265
+    24x24   blk_v=41 gap= 0/0  :    287 cyc (ideal   144), rd=   3324 wr=   144, 1st out +142
+    32x49   blk_v=41 gap= 7/11 :    646 cyc (ideal   392), rd=  12032 wr=   392, 1st out +196
+    25x24   blk_v=43 gap= 0/0  :    338 cyc (ideal   168), rd=   3871 wr=   168, 1st out +169
+    32x52   blk_v=43 gap=21/33 :    891 cyc (ideal   416), rd=  12984 wr=   416, 1st out +248
+    26x24   blk_v=45 gap= 0/0  :    345 cyc (ideal   168), rd=   3976 wr=   168, 1st out +176
+    32x55   blk_v=45 gap=35/15 :    921 cyc (ideal   440), rd=  14464 wr=   440, 1st out +284
+    27x24   blk_v=47 gap= 0/0  :    352 cyc (ideal   168), rd=   3955 wr=   168, 1st out +184
+    32x58   blk_v=47 gap= 9/37 :    975 cyc (ideal   464), rd=  16568 wr=   464, 1st out +223
+    28x24   blk_v=49 gap= 0/0  :    359 cyc (ideal   168), rd=   4032 wr=   168, 1st out +191
+    32x49   blk_v=49 gap=23/19 :    791 cyc (ideal   392), rd=  12512 wr=   392, 1st out +281
+== 50 frames, 233024 component checks, 0 errors, longest dead run 40 ==
+ALIGNMENT checks=96650 errors=0
+COVERAGE blk_v=2aaaaaaaaaaaa width_mod4=f bank_wrap_frames=18
+COVERAGE shifts s1=1ffffffffffff s2=1ffffffffffff s3=1ffffffffffff
+TEST PASSED
+== exit code 0  end 2026-09-03 11:39:48
