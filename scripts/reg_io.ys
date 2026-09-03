@@ -1,0 +1,12 @@
+# Export the register-level netlist for the REG_IN / REG_OUT structural
+# check (scripts/check_reg_io.py).  Enables are folded into $dffe/$adffe
+# cells so that a port that goes straight into an enabled register shows up
+# as a direct connection to that register's D input.
+read_verilog rtl/img_filter_def.v rtl/img_filter.v
+hierarchy -top IMG_FILTER -check
+proc
+opt_expr
+opt_clean
+opt_dff
+opt_clean
+write_json scripts/logs/reg_io.json

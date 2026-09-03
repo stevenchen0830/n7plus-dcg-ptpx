@@ -1,0 +1,12 @@
+== run_sim.sh CASE_A  start 2026-09-03 10:02:58
+== rtl sha256: f68b6b1f90eb3b0f  tb sha256: d6848e5345d1827d
+== Icarus Verilog version 11.0 (stable) ()
+== IMG_FILTER regression seed=0x12345678 ==
+  1440x24   blk_v= 5 gap= 0/0  :   9383 cyc (ideal  8640), rd=  33120 wr=  8640, 1st out +742
+POWER CASE A: mem accesses=41760  MPx=`MEM_DWTH*acc/6400=1044
+== 1 frames, 138240 component checks, 0 errors, longest dead run 24 ==
+ALIGNMENT checks=1200 errors=0
+COVERAGE blk_v=0000000000020 width_mod4=1 bank_wrap_frames=0
+COVERAGE shifts s1=1fffffe000000 s2=0000000ffffff s3=10000007fffff
+TEST PASSED
+== exit code 0  end 2026-09-03 10:12:47

@@ -1,0 +1,16 @@
+# simulation artifacts
+*.vvp
+*.vcd
+*.fsdb
+obj_dir/
+# synthesis / power run directories (regenerate with syn/run_all.sh)
+syn/dcg/work/
+syn/dcg/outputs/
+syn/dcg/*.mw/
+syn/dcg/alib-*/
+syn/*/command.log
+syn/*/default.svf
+syn/*/*.log
+# keep committed evidence logs
+!verification/logs/*.log
+!scripts/logs/*.log

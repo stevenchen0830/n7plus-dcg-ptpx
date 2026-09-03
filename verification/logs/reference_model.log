@@ -1,0 +1,12 @@
+1. mirrorMap corner cases
+   14 cases
+2. single fold holds for every legal shape (H >= 24, |k| <= 24)
+   ok: -H <= y+k <= 2H-1 always, one reflection is enough
+3. architecture equals specification
+   117 (shape, kernel) combinations
+4. golden filter self consistency (flat image is preserved)
+   a constant image survives every kernel (sum of coef = 128)
+5. saturation head room
+   max possible result 1023, output width 10 bit -> no overflow
+
+ALL REFERENCE CHECKS PASSED

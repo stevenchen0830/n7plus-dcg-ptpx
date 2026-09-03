@@ -1,0 +1,4 @@
+# Reports and manifests are checksummed over LF content - never translate.
+* text=auto eol=lf
+*.webp -text
+*.png -text

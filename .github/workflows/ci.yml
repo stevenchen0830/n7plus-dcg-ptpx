@@ -1,0 +1,50 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install open-source tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq iverilog verilator yosys
+      - name: Reference model (executable spec + architecture cross-check)
+        run: python3 verification/reference_model.py
+      - name: Icarus smoke regression (13 frames)
+        run: |
+          sh scripts/run_sim.sh SMOKE
+          grep -q "TEST PASSED" verification/logs/smoke.log
+      - name: Directed blk_v 27 / 31 / 37 / 45 frames
+        run: |
+          sh scripts/run_sim.sh BLKV_GAP
+          grep -q "TEST PASSED" verification/logs/blkv_gap.log
+      - name: Split-rotator exhaustive shift test
+        run: |
+          iverilog -g2012 -o rotator.vvp rtl/img_filter_def.v rtl/img_filter.v \
+                   verification/rotator_tb.v
+          vvp rotator.vvp | tee rotator.log
+          grep -q "ROTATOR TEST PASSED" rotator.log
+      - name: Yosys structural checks (REG_IN/REG_OUT, no latch, no memory, depth)
+        run: |
+          sh scripts/run_yosys_checks.sh
+          grep -q "REG_IN/REG_OUT CHECK PASSED" scripts/logs/check_reg_io.log
+      - name: Verilator lint
+        run: verilator --lint-only -Irtl -Wno-UNSIGNED rtl/img_filter.v --top-module IMG_FILTER
+      - name: Score sheet (formula terms only; DCG / PTPX terms stay PENDING here)
+        run: python3 scripts/score.py --cycles 9383 --mp-accesses 41760
+
+  all-kernels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Icarus
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq iverilog
+      - name: Every legal blk_v 1..49, two frames each (50 frames)
+        run: |
+          sh scripts/run_sim.sh ALL_BLKV
+          grep -q "TEST PASSED" verification/logs/all_blkv.log
+          grep -q "blk_v=2aaaaaaaaaaaa" verification/logs/all_blkv.log

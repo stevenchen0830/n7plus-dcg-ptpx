@@ -1,0 +1,9 @@
+== run_sim.sh FULL  start 2026-09-03 10:01:27
+== rtl sha256: f68b6b1f90eb3b0f  tb sha256: 09c332a8fadf58c8
+== Icarus Verilog version 11.0 (stable) ()
+== IMG_FILTER regression seed=0x12345678 ==
+    32x24   blk_v= 1 gap= 0/0  :    215 cyc (ideal   192), rd=      0 wr=     0, 1st out +22
+    32x24   blk_v= 3 gap= 0/0  :    223 cyc (ideal   192), rd=    376 wr=   192, 1st out +30
+    28x25   blk_v= 5 gap= 0/0  :    212 cyc (ideal   175), rd=    672 wr=   175, 1st out +36
+    26x24   blk_v= 7 gap= 0/0  :    212 cyc (ideal   168), rd=    945 wr=   168, 1st out +43
+== exit code 0  end 2026-09-03 10:02:31

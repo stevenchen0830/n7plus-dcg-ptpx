@@ -1,0 +1,30 @@
+# Generic structural synthesis check for IMG_FILTER (Yosys, no PDK).
+# Proves the two structural rules of the assignment:
+#   - internal buffers are built from registers: no latch, no inferred memory
+#   - the RTL elaborates and maps to plain gates (technology independent count)
+# The graded numbers (area / timing / power) come from the N7+ DCG flow in
+# syn/, not from this script.
+read_verilog rtl/img_filter_def.v rtl/img_filter.v
+hierarchy -top IMG_FILTER -check
+
+proc
+opt_expr
+opt_clean
+check -assert
+
+fsm
+opt
+memory -nomap
+opt -full
+
+techmap
+opt -fast
+
+# no latches and no inferred RAM are allowed by the assignment
+select -assert-none t:$dlatch t:$adlatch t:$sr t:$dlatchsr
+select -assert-none t:$mem t:$mem_v2 t:$memrd t:$memrd_v2 t:$memwr t:$memwr_v2
+
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX,AOI3,OAI3,AOI4,OAI4
+opt_clean
+
+tee -o scripts/logs/synth_check_stat.txt stat

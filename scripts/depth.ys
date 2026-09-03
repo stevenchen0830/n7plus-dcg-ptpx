@@ -1,0 +1,12 @@
+# Register-to-register logic depth, technology independent (generic gates).
+# Gives the logic-level budget that the 0.9 ns DCG period (1 ns - 10 % DCG
+# margin - 0.15 ns setup uncertainty = 0.75 ns of usable logic time at
+# ssgnp 0.675 V / 125 C) has to absorb.  ltp reports the longest
+# topological path in gate levels.
+read_verilog rtl/img_filter_def.v rtl/img_filter.v
+hierarchy -top IMG_FILTER -check
+proc; opt; fsm; opt; memory -nomap; opt -full
+techmap; opt -fast
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX,AOI3,OAI3,AOI4,OAI4
+opt_clean
+tee -o scripts/logs/depth_ltp.txt ltp -noff

@@ -1,0 +1,31 @@
+== run_sim.sh ALL_BLKV  start 2026-09-03 10:02:54
+== rtl sha256: f68b6b1f90eb3b0f  tb sha256: d6848e5345d1827d
+== Icarus Verilog version 11.0 (stable) ()
+== IMG_FILTER regression seed=0x12345678 ==
+    24x24   blk_v= 1 gap= 0/0  :    167 cyc (ideal   144), rd=      0 wr=     0, 1st out +22
+    32x49   blk_v= 1 gap= 7/11 :    490 cyc (ideal   392), rd=      0 wr=     0, 1st out +24
+    25x24   blk_v= 3 gap= 0/0  :    198 cyc (ideal   168), rd=    329 wr=   168, 1st out +29
+    32x52   blk_v= 3 gap=21/33 :    693 cyc (ideal   416), rd=    824 wr=   416, 1st out +34
+    26x24   blk_v= 5 gap= 0/0  :    205 cyc (ideal   168), rd=    644 wr=   168, 1st out +36
+    32x55   blk_v= 5 gap=35/15 :    757 cyc (ideal   440), rd=   1728 wr=   440, 1st out +50
+    27x24   blk_v= 7 gap= 0/0  :    212 cyc (ideal   168), rd=    945 wr=   168, 1st out +44
+    32x58   blk_v= 7 gap= 9/37 :    791 cyc (ideal   464), rd=   2712 wr=   464, 1st out +47
+    28x24   blk_v= 9 gap= 0/0  :    219 cyc (ideal   168), rd=   1232 wr=   168, 1st out +51
+    32x49   blk_v= 9 gap=23/19 :    635 cyc (ideal   392), rd=   3008 wr=   392, 1st out +69
+    24x24   blk_v=11 gap= 0/0  :    197 cyc (ideal   144), rd=   1290 wr=   144, 1st out +53
+    32x52   blk_v=11 gap=37/1  :    721 cyc (ideal   416), rd=   3960 wr=   416, 1st out +81
+    25x24   blk_v=13 gap= 0/0  :    233 cyc (ideal   168), rd=   1764 wr=   168, 1st out +65
+    32x55   blk_v=13 gap=11/23 :    687 cyc (ideal   440), rd=   4992 wr=   440, 1st out +77
+    26x24   blk_v=15 gap= 0/0  :    240 cyc (ideal   168), rd=   2009 wr=   168, 1st out +71
+    32x58   blk_v=15 gap=25/5  :    693 cyc (ideal   464), rd=   6104 wr=   464, 1st out +100
+    27x24   blk_v=17 gap= 0/0  :    247 cyc (ideal   168), rd=   2240 wr=   168, 1st out +78
+    32x49   blk_v=17 gap=39/27 :    783 cyc (ideal   392), rd=   5760 wr=   392, 1st out +120
+    28x24   blk_v=19 gap= 0/0  :    254 cyc (ideal   168), rd=   2457 wr=   168, 1st out +86
+    32x52   blk_v=19 gap=13/9  :    610 cyc (ideal   416), rd=   6840 wr=   416, 1st out +105
+    24x24   blk_v=21 gap= 0/0  :    227 cyc (ideal   144), rd=   2280 wr=   144, 1st out +82
+    32x55   blk_v=21 gap=27/31 :    831 cyc (ideal   440), rd=   8000 wr=   440, 1st out +152
+    25x24   blk_v=23 gap= 0/0  :    268 cyc (ideal   168), rd=   2849 wr=   168, 1st out +100
+    32x58   blk_v=23 gap= 1/13 :    640 cyc (ideal   464), rd=   9240 wr=   464, 1st out +111
+    26x24   blk_v=25 gap= 0/0  :    275 cyc (ideal   168), rd=   3024 wr=   168, 1st out +106
+    32x49   blk_v=25 gap=15/35 :    762 cyc (ideal   392), rd=   8256 wr=   392, 1st out +136
+    27x24   blk_v=27 gap= 0/0  :    282 cyc (ideal   168), rd=   3185 wr=   168, 1st out +113
