@@ -53,7 +53,7 @@
 | 4.2 | 内部缓存用 reg，不用生成的 memory 和 latch | 符合（已验证） | `scripts/synth_check.ys` 断言无 `$dlatch/$mem*`：`scripts/logs/synth_check_stat.txt`（22,498 个触发器，470,032 个通用门） |
 | 4.3 | REG_IN：除 `clk/rst_n/in_pix_rdy/out_pix_need/frm_start` 外所有输入直接进寄存器 | 符合（已验证） | `scripts/check_reg_io.py`：`in_pix_data`(160)、`mem_rdata`(7840)、`img_width`(9 位使用)、`img_height`(12)、`blk_v`(5 位使用)、`coef`(200) 的每一位**只**到触发器 D 端，端口与 D 端之间没有任何逻辑（`scripts/logs/check_reg_io.log`） |
 | 4.4 | REG_OUT：`out_pix_data` 直接出寄存器 | 符合（已验证） | 同上：160 位全部由触发器 Q 端驱动 |
-| 4.5 | 输入输出均无握手的连续周期 ≤ 20000 | 符合（已验证） | TB 监视器 `DEADMAX=20000`；所有回归最长无握手 40 拍 |
+| 4.5 | 输入输出均无握手的连续周期 ≤ 20000 | 符合（已验证） | TB 监视器 `DEADMAX=20000`；所有回归最长无握手 41 拍 |
 
 ## 5. 综合与评分环境（待官方环境）
 
