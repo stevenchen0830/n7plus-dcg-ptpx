@@ -64,6 +64,6 @@ sh syn/check_scripts.sh
 | 级别 | 做法 | 代价 | 何时用 |
 | --- | --- | --- | --- |
 | 1. 流程级 | `DCG_RETIME_MAC=1 dc_shell -topographical -f run_dcg.tcl`：只解锁 MAC 流水寄存器（`pair_q/part_q`，其余全部 `set_dont_retime`），`compile_ultra -retime` 把它们移进乘加树 | 不改 RTL，不需重跑回归；面积基本不变 | slack 在 −50～−150 ps |
-| 2. RTL 级 | 切到 `mac4` 分支：50 个乘积先寄存，MAC 四级流水 | +16×50×18 bit 寄存器（约 +14k 触发器），+1 拍延时，面积项估计少 3～4 分 | 级别 1 仍不够，且负 slack 的损失大于面积损失 |
+| 2. RTL 级 | 切到 `mac4` 分支：每个 10×8 乘法拆成两个 10×4 半乘先寄存，MAC 四级流水 | ASAP7 慢角 A/B（`docs/asap7_ab.md`）：最差路径 −25 %，面积 +24 %，+22.8 k 触发器，+1 拍延时，面积项约 −4 分 | 级别 1 仍不够，且 slack 差于约 −200 ps |
 
 两级都不改变 REG_IN/REG_OUT 结构，也不改变吞吐（4 像素/拍）。

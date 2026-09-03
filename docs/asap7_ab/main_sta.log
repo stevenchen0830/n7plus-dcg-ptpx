@@ -1,0 +1,505 @@
+OpenSTA 3.1.0 509913b139 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13156, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13189, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13222, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13255, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13288, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13321, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13354, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14748, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14781, timing group from output port.
+Warning 1212: /root/ORFS/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14814, timing group from output port.
+==== main : summary ====
+worst slack max -586.14
+tns max -2636868.75
+==== main : worst 3 paths, full ====
+Startpoint: ce_d2[47]$_DFFE_PN0P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: pair_q[73][18]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ ce_d2[47]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ 106.78  106.78 v ce_d2[47]$_DFFE_PN0P_/QN (DFFASRHQNx1_ASAP7_75t_R)
+  58.27  165.05 v _599663_/Y (BUFx2_ASAP7_75t_R)
+  47.46  212.51 v _599664_/Y (BUFx2_ASAP7_75t_R)
+  38.66  251.17 v _599683_/Y (OR2x2_ASAP7_75t_R)
+  47.72  298.89 v _599684_/Y (BUFx2_ASAP7_75t_R)
+  30.55  329.44 ^ _599800_/Y (NOR2x1_ASAP7_75t_R)
+  62.27  391.71 v _793465_/SN (FAx1_ASAP7_75t_R)
+  28.62  420.33 ^ _488080_/Y (INVx1_ASAP7_75t_R)
+  60.98  481.31 v _838383_/SN (FAx1_ASAP7_75t_R)
+  28.41  509.72 ^ _488437_/Y (INVx1_ASAP7_75t_R)
+  60.94  570.66 v _792841_/SN (FAx1_ASAP7_75t_R)
+  28.40  599.06 ^ _600242_/Y (INVx1_ASAP7_75t_R)
+  60.94  660.00 v _832903_/SN (FAx1_ASAP7_75t_R)
+  28.40  688.40 ^ _600246_/Y (INVx1_ASAP7_75t_R)
+  60.94  749.33 v _838577_/SN (FAx1_ASAP7_75t_R)
+  28.40  777.73 ^ _702712_/Y (INVx1_ASAP7_75t_R)
+  31.00  808.73 v _838561_/CON (FAx1_ASAP7_75t_R)
+  24.56  833.30 ^ _838561_/SN (FAx1_ASAP7_75t_R)
+  21.68  854.97 v _488465_/Y (INVx1_ASAP7_75t_R)
+  91.02  945.99 v _868461_/SN (HAxp5_ASAP7_75t_R)
+  49.47  995.45 v _591772_/Y (OA21x2_ASAP7_75t_R)
+  41.15 1036.60 v _591773_/Y (OA21x2_ASAP7_75t_R)
+  27.01 1063.61 v _592298_/Y (AND3x1_ASAP7_75t_R)
+  25.97 1089.58 v _592299_/Y (OA21x2_ASAP7_75t_R)
+  68.21 1157.79 v _627753_/Y (OR5x1_ASAP7_75t_R)
+  58.42 1216.21 v _627755_/Y (OA211x2_ASAP7_75t_R)
+  47.31 1263.53 v _627758_/Y (AO221x1_ASAP7_75t_R)
+  44.28 1307.81 ^ _627760_/Y (XNOR2x2_ASAP7_75t_R)
+   0.00 1307.81 ^ pair_q[73][18]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+        1307.81   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ pair_q[73][18]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.33  721.67   library setup time
+         721.67   data required time
+---------------------------------------------------------
+         721.67   data required time
+        -1307.81   data arrival time
+---------------------------------------------------------
+        -586.14   slack (VIOLATED)
+
+
+Startpoint: ce_d2[5]$_DFFE_PN0P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: pair_q[377][17]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ ce_d2[5]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ 106.78  106.78 v ce_d2[5]$_DFFE_PN0P_/QN (DFFASRHQNx1_ASAP7_75t_R)
+  58.27  165.05 v _616462_/Y (BUFx2_ASAP7_75t_R)
+  47.46  212.51 v _634373_/Y (BUFx2_ASAP7_75t_R)
+  38.66  251.17 v _634389_/Y (OR2x2_ASAP7_75t_R)
+  47.72  298.89 v _634390_/Y (BUFx2_ASAP7_75t_R)
+  30.55  329.44 ^ _634495_/Y (NOR2x1_ASAP7_75t_R)
+  62.27  391.71 v _800813_/SN (FAx1_ASAP7_75t_R)
+  28.62  420.33 ^ _530920_/Y (INVx1_ASAP7_75t_R)
+  60.98  481.31 v _800798_/SN (FAx1_ASAP7_75t_R)
+  28.41  509.72 ^ _503998_/Y (INVx1_ASAP7_75t_R)
+  60.94  570.66 v _800838_/SN (FAx1_ASAP7_75t_R)
+  28.39  599.05 ^ _490961_/Y (INVx1_ASAP7_75t_R)
+  60.94  659.99 v _800592_/SN (FAx1_ASAP7_75t_R)
+  28.40  688.39 ^ _542519_/Y (INVx1_ASAP7_75t_R)
+  60.94  749.33 v _800388_/SN (FAx1_ASAP7_75t_R)
+  28.26  777.59 ^ _542599_/Y (INVx1_ASAP7_75t_R)
+  30.97  808.56 v _800548_/CON (FAx1_ASAP7_75t_R)
+  24.56  833.11 ^ _800548_/SN (FAx1_ASAP7_75t_R)
+  21.68  854.79 v _582244_/Y (INVx1_ASAP7_75t_R)
+ 105.32  960.11 v _874327_/SN (HAxp5_ASAP7_75t_R)
+  48.25 1008.36 v _515090_/Y (OA21x2_ASAP7_75t_R)
+  38.93 1047.29 v _515091_/Y (OA21x2_ASAP7_75t_R)
+  38.38 1085.67 v _515092_/Y (OA21x2_ASAP7_75t_R)
+  44.06 1129.74 v _515097_/Y (OA31x2_ASAP7_75t_R)
+  52.22 1181.96 v _515100_/Y (OA211x2_ASAP7_75t_R)
+  38.35 1220.31 v _692871_/Y (OA21x2_ASAP7_75t_R)
+  36.99 1257.30 v _692872_/Y (OA21x2_ASAP7_75t_R)
+  48.25 1305.55 ^ _692873_/Y (XOR2x2_ASAP7_75t_R)
+   0.00 1305.55 ^ pair_q[377][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+        1305.55   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ pair_q[377][17]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.72  721.28   library setup time
+         721.28   data required time
+---------------------------------------------------------
+         721.28   data required time
+        -1305.55   data arrival time
+---------------------------------------------------------
+        -584.27   slack (VIOLATED)
+
+
+Startpoint: ce_d2[47]$_DFFE_PN0P_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: pair_q[73][17]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ ce_d2[47]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ 106.78  106.78 v ce_d2[47]$_DFFE_PN0P_/QN (DFFASRHQNx1_ASAP7_75t_R)
+  58.27  165.05 v _599663_/Y (BUFx2_ASAP7_75t_R)
+  47.46  212.51 v _599664_/Y (BUFx2_ASAP7_75t_R)
+  38.66  251.17 v _599683_/Y (OR2x2_ASAP7_75t_R)
+  47.72  298.89 v _599684_/Y (BUFx2_ASAP7_75t_R)
+  30.55  329.44 ^ _599800_/Y (NOR2x1_ASAP7_75t_R)
+  62.27  391.71 v _793465_/SN (FAx1_ASAP7_75t_R)
+  28.62  420.33 ^ _488080_/Y (INVx1_ASAP7_75t_R)
+  60.98  481.31 v _838383_/SN (FAx1_ASAP7_75t_R)
+  28.41  509.72 ^ _488437_/Y (INVx1_ASAP7_75t_R)
+  60.94  570.66 v _792841_/SN (FAx1_ASAP7_75t_R)
+  28.40  599.06 ^ _600242_/Y (INVx1_ASAP7_75t_R)
+  60.94  660.00 v _832903_/SN (FAx1_ASAP7_75t_R)
+  28.40  688.40 ^ _600246_/Y (INVx1_ASAP7_75t_R)
+  60.94  749.33 v _838577_/SN (FAx1_ASAP7_75t_R)
+  28.40  777.73 ^ _702712_/Y (INVx1_ASAP7_75t_R)
+  31.00  808.73 v _838561_/CON (FAx1_ASAP7_75t_R)
+  24.56  833.30 ^ _838561_/SN (FAx1_ASAP7_75t_R)
+  21.68  854.97 v _488465_/Y (INVx1_ASAP7_75t_R)
+  91.02  945.99 v _868461_/SN (HAxp5_ASAP7_75t_R)
+  49.47  995.45 v _591772_/Y (OA21x2_ASAP7_75t_R)
+  41.15 1036.60 v _591773_/Y (OA21x2_ASAP7_75t_R)
+  45.11 1081.71 v _591774_/Y (OR3x1_ASAP7_75t_R)
+  27.67 1109.38 v _591775_/Y (OA21x2_ASAP7_75t_R)
+  57.83 1167.21 v _591777_/Y (OA211x2_ASAP7_75t_R)
+  37.91 1205.12 v _627745_/Y (OA31x2_ASAP7_75t_R)
+  37.29 1242.41 v _627746_/Y (OA21x2_ASAP7_75t_R)
+  48.08 1290.49 ^ _627747_/Y (XOR2x2_ASAP7_75t_R)
+   0.00 1290.49 ^ pair_q[73][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+        1290.49   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ pair_q[73][17]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.46  721.54   library setup time
+         721.54   data required time
+---------------------------------------------------------
+         721.54   data required time
+        -1290.49   data arrival time
+---------------------------------------------------------
+        -568.95   slack (VIOLATED)
+
+
+==== main : worst endpoints (unique, 10) ====
+max_delay/setup group clk
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+pair_q[73][18]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.67 1307.81 -586.14 (VIOLATED)
+pair_q[377][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.28 1305.55 -584.27 (VIOLATED)
+pair_q[73][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.54 1290.49 -568.95 (VIOLATED)
+pair_q[106][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[144][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[15][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[179][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[207][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[209][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+pair_q[327][17]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)  721.52 1282.02 -560.50 (VIOLATED)
+
+==== main : stage rdata_q->MAC1 (7840 -> 7600 regs) ====
+Startpoint: rdata_q[7543]$_DFFE_PP_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: pair_q[73][18]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ rdata_q[7543]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  64.43   64.43 v rdata_q[7543]$_DFFE_PP_/QN (DFFHQNx1_ASAP7_75t_R)
+  37.75  102.18 v _599683_/Y (OR2x2_ASAP7_75t_R)
+  47.72  149.90 v _599684_/Y (BUFx2_ASAP7_75t_R)
+  30.55  180.45 ^ _599800_/Y (NOR2x1_ASAP7_75t_R)
+  62.27  242.72 v _793465_/SN (FAx1_ASAP7_75t_R)
+  28.62  271.34 ^ _488080_/Y (INVx1_ASAP7_75t_R)
+  60.98  332.32 v _838383_/SN (FAx1_ASAP7_75t_R)
+  28.41  360.73 ^ _488437_/Y (INVx1_ASAP7_75t_R)
+  60.94  421.67 v _792841_/SN (FAx1_ASAP7_75t_R)
+  28.40  450.07 ^ _600242_/Y (INVx1_ASAP7_75t_R)
+  60.94  511.01 v _832903_/SN (FAx1_ASAP7_75t_R)
+  28.40  539.41 ^ _600246_/Y (INVx1_ASAP7_75t_R)
+  60.94  600.34 v _838577_/SN (FAx1_ASAP7_75t_R)
+  28.40  628.74 ^ _702712_/Y (INVx1_ASAP7_75t_R)
+  31.00  659.74 v _838561_/CON (FAx1_ASAP7_75t_R)
+  24.56  684.31 ^ _838561_/SN (FAx1_ASAP7_75t_R)
+  21.68  705.98 v _488465_/Y (INVx1_ASAP7_75t_R)
+  91.02  797.00 v _868461_/SN (HAxp5_ASAP7_75t_R)
+  49.47  846.46 v _591772_/Y (OA21x2_ASAP7_75t_R)
+  41.15  887.61 v _591773_/Y (OA21x2_ASAP7_75t_R)
+  27.01  914.62 v _592298_/Y (AND3x1_ASAP7_75t_R)
+  25.97  940.59 v _592299_/Y (OA21x2_ASAP7_75t_R)
+  68.21 1008.80 v _627753_/Y (OR5x1_ASAP7_75t_R)
+  58.42 1067.22 v _627755_/Y (OA211x2_ASAP7_75t_R)
+  47.31 1114.54 v _627758_/Y (AO221x1_ASAP7_75t_R)
+  44.28 1158.82 ^ _627760_/Y (XNOR2x2_ASAP7_75t_R)
+   0.00 1158.82 ^ pair_q[73][18]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+        1158.82   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ pair_q[73][18]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.33  721.67   library setup time
+         721.67   data required time
+---------------------------------------------------------
+         721.67   data required time
+        -1158.82   data arrival time
+---------------------------------------------------------
+        -437.15   slack (VIOLATED)
+
+
+Warning 349: ab_sta.tcl line 1, instance '(pplo_q|pphi_q)\[.*' not found.
+==== main : stage MAC1->pair_q : NO CELLS (from 0, to 7600) ====
+==== main : stage pair_q->part_q (7600 -> 1600 regs) ====
+Startpoint: pair_q[151][6]$_DFFE_PP_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: part_q[30][19]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ pair_q[151][6]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  65.49   65.49 v pair_q[151][6]$_DFFE_PP_/QN (DFFHQNx1_ASAP7_75t_R)
+  25.66   91.15 ^ _785630_/Y (INVx1_ASAP7_75t_R)
+  60.39  151.54 v _820882_/SN (FAx1_ASAP7_75t_R)
+  28.30  179.85 ^ _609838_/Y (INVx1_ASAP7_75t_R)
+  60.92  240.77 v _820027_/SN (FAx1_ASAP7_75t_R)
+  28.30  269.07 ^ _691289_/Y (INVx1_ASAP7_75t_R)
+  30.98  300.05 v _818961_/CON (FAx1_ASAP7_75t_R)
+  24.56  324.61 ^ _818961_/SN (FAx1_ASAP7_75t_R)
+  21.50  346.11 v _591761_/Y (INVx1_ASAP7_75t_R)
+ 104.35  450.46 v _853169_/SN (HAxp5_ASAP7_75t_R)
+  52.38  502.84 v _538882_/Y (OA21x2_ASAP7_75t_R)
+  38.85  541.69 v _538883_/Y (OA21x2_ASAP7_75t_R)
+  60.05  601.75 v _538887_/Y (OA221x2_ASAP7_75t_R)
+  40.72  642.46 v _538890_/Y (OA22x2_ASAP7_75t_R)
+  46.42  688.88 v _538893_/Y (AO221x1_ASAP7_75t_R)
+  52.85  741.74 v _538897_/Y (OA211x2_ASAP7_75t_R)
+  38.34  780.08 v _538898_/Y (OA21x2_ASAP7_75t_R)
+  36.69  816.77 v _538899_/Y (OA21x2_ASAP7_75t_R)
+  42.91  859.68 ^ _538902_/Y (XNOR2x2_ASAP7_75t_R)
+   0.00  859.68 ^ part_q[30][19]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+         859.68   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ part_q[30][19]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.32  721.68   library setup time
+         721.68   data required time
+---------------------------------------------------------
+         721.68   data required time
+        -859.68   data arrival time
+---------------------------------------------------------
+        -138.00   slack (VIOLATED)
+
+
+==== main : stage part_q->output (1600 -> 320 regs) ====
+Startpoint: part_q[61][5]$_DFFE_PP_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: oskid_d[120]$_DFFE_PN0P_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ part_q[61][5]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  65.49   65.49 v part_q[61][5]$_DFFE_PP_/QN (DFFHQNx1_ASAP7_75t_R)
+  25.66   91.15 ^ _772097_/Y (INVx1_ASAP7_75t_R)
+  60.39  151.54 v _836520_/SN (FAx1_ASAP7_75t_R)
+  28.30  179.85 ^ _583096_/Y (INVx1_ASAP7_75t_R)
+  60.92  240.77 v _836503_/SN (FAx1_ASAP7_75t_R)
+  28.26  269.03 ^ _624697_/Y (INVx1_ASAP7_75t_R)
+  30.97  299.99 v _836486_/CON (FAx1_ASAP7_75t_R)
+  24.56  324.55 ^ _836486_/SN (FAx1_ASAP7_75t_R)
+  21.55  346.10 v _583174_/Y (INVx1_ASAP7_75t_R)
+  68.57  414.67 v _855024_/SN (HAxp5_ASAP7_75t_R)
+  58.98  473.66 v _740539_/Y (OR4x1_ASAP7_75t_R)
+  50.54  524.20 v _740543_/Y (OA211x2_ASAP7_75t_R)
+  44.96  569.16 v _740547_/Y (OA21x2_ASAP7_75t_R)
+  40.81  609.97 v _740552_/Y (OA31x2_ASAP7_75t_R)
+  82.14  692.11 v _740553_/Y (OR5x1_ASAP7_75t_R)
+  43.23  735.34 v _740561_/Y (AND5x1_ASAP7_75t_R)
+  55.81  791.16 v _740563_/Y (OR3x1_ASAP7_75t_R)
+  53.85  845.01 v _740581_/Y (AND2x2_ASAP7_75t_R)
+  59.27  904.28 v _740582_/Y (BUFx2_ASAP7_75t_R)
+  28.01  932.29 ^ _740607_/Y (NAND2x1_ASAP7_75t_R)
+   0.00  932.29 ^ oskid_d[120]$_DFFE_PN0P_/D (DFFASRHQNx1_ASAP7_75t_R)
+         932.29   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ oskid_d[120]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ -38.33  711.67   library setup time
+         711.67   data required time
+---------------------------------------------------------
+         711.67   data required time
+        -932.29   data arrival time
+---------------------------------------------------------
+        -220.62   slack (VIOLATED)
+
+
+==== main : stage rotatorA (442 -> 1105 regs) ====
+Startpoint: hv_q[0]$_DFFE_PN0P_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: cvlo1_q[64]$_DFF_P_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ hv_q[0]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ 127.87  127.87 v hv_q[0]$_DFFE_PN0P_/QN (DFFASRHQNx1_ASAP7_75t_R)
+  44.38  172.24 ^ _573295_/Y (INVx1_ASAP7_75t_R)
+  52.69  224.94 ^ _573296_/Y (BUFx2_ASAP7_75t_R)
+  49.50  274.44 ^ _573297_/Y (BUFx2_ASAP7_75t_R)
+  51.29  325.73 ^ _573298_/Y (BUFx2_ASAP7_75t_R)
+  51.09  376.82 ^ _573299_/Y (BUFx2_ASAP7_75t_R)
+  62.92  439.74 ^ _573300_/Y (BUFx2_ASAP7_75t_R)
+  29.42  469.17 v _870545_/CON (HAxp5_ASAP7_75t_R)
+  17.70  486.87 ^ _762998_/Y (INVx1_ASAP7_75t_R)
+  26.86  513.73 ^ _762999_/Y (AO21x1_ASAP7_75t_R)
+  26.44  540.17 ^ _763000_/Y (AO21x1_ASAP7_75t_R)
+  26.48  566.65 ^ _763001_/Y (AO21x1_ASAP7_75t_R)
+  37.00  603.65 ^ _763002_/Y (AO21x1_ASAP7_75t_R)
+  47.96  651.61 ^ _763003_/Y (BUFx2_ASAP7_75t_R)
+  51.77  703.38 ^ _763004_/Y (BUFx2_ASAP7_75t_R)
+  52.80  756.18 ^ _765605_/Y (AO21x1_ASAP7_75t_R)
+  53.70  809.88 ^ _765606_/Y (BUFx2_ASAP7_75t_R)
+  61.15  871.03 ^ _765713_/Y (AND4x1_ASAP7_75t_R)
+  44.00  915.03 ^ _765715_/Y (OA33x2_ASAP7_75t_R)
+  37.32  952.35 ^ _765717_/Y (OA211x2_ASAP7_75t_R)
+  23.56  975.91 ^ _765718_/Y (BUFx3_ASAP7_75t_R)
+   0.00  975.91 ^ cvlo1_q[64]$_DFF_P_/D (DFFHQNx1_ASAP7_75t_R)
+         975.91   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ cvlo1_q[64]$_DFF_P_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -27.31  722.69   library setup time
+         722.69   data required time
+---------------------------------------------------------
+         722.69   data required time
+        -975.91   data arrival time
+---------------------------------------------------------
+        -253.21   slack (VIOLATED)
+
+
+==== main : stage rotatorB (1097 -> 441 regs) ====
+Startpoint: shi1_q[0]$_DFF_P_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: c_fut[215]$_DFF_P_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ shi1_q[0]$_DFF_P_/CLK (DFFHQNx1_ASAP7_75t_R)
+  75.42   75.42 ^ shi1_q[0]$_DFF_P_/QN (DFFHQNx1_ASAP7_75t_R)
+  49.38  124.80 ^ _478085_/Y (BUFx2_ASAP7_75t_R)
+  59.58  184.38 ^ _481834_/Y (BUFx2_ASAP7_75t_R)
+  63.82  248.20 ^ _751550_/Y (BUFx2_ASAP7_75t_R)
+  62.12  310.32 ^ _751551_/Y (BUFx2_ASAP7_75t_R)
+  43.44  353.76 ^ _753362_/Y (OA21x2_ASAP7_75t_R)
+  30.55  384.31 ^ _753363_/Y (AND2x2_ASAP7_75t_R)
+  17.48  401.78 v _753364_/Y (AOI21x1_ASAP7_75t_R)
+  20.40  422.18 ^ _756703_/Y (NAND2x1_ASAP7_75t_R)
+  39.31  461.49 ^ _756704_/Y (OA21x2_ASAP7_75t_R)
+  58.84  520.33 v _814386_/SN (FAx1_ASAP7_75t_R)
+  20.96  541.29 ^ _664221_/Y (INVx1_ASAP7_75t_R)
+  25.66  566.95 v _869227_/CON (HAxp5_ASAP7_75t_R)
+  25.69  592.64 ^ _615339_/Y (INVx1_ASAP7_75t_R)
+  34.85  627.50 v _814398_/CON (FAx1_ASAP7_75t_R)
+  45.72  673.22 v _536539_/Y (OA21x2_ASAP7_75t_R)
+  38.65  711.87 v _536540_/Y (OA21x2_ASAP7_75t_R)
+  36.56  748.43 v _536541_/Y (OA21x2_ASAP7_75t_R)
+  36.69  785.12 v _536542_/Y (OA21x2_ASAP7_75t_R)
+  42.91  828.03 ^ _536567_/Y (XNOR2x2_ASAP7_75t_R)
+   0.00  828.03 ^ c_fut[215]$_DFF_P_/D (DFFHQNx1_ASAP7_75t_R)
+         828.03   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ c_fut[215]$_DFF_P_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -28.32  721.68   library setup time
+         721.68   data required time
+---------------------------------------------------------
+         721.68   data required time
+        -828.03   data arrival time
+---------------------------------------------------------
+        -106.35   slack (VIOLATED)
+
+
+==== main : stage ctrl->memcmd (83 -> 108 regs) ====
+Startpoint: oskid_v$_DFFE_PN0P_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: m_1h[25]$_DFFE_PN0P_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ oskid_v$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+  93.21   93.21 ^ oskid_v$_DFFE_PN0P_/QN (DFFASRHQNx1_ASAP7_75t_R)
+  31.79  125.01 v _766149_/Y (INVx1_ASAP7_75t_R)
+  57.37  182.38 v _766178_/Y (BUFx2_ASAP7_75t_R)
+  65.35  247.73 v _766179_/Y (BUFx2_ASAP7_75t_R)
+  57.32  305.05 ^ _868785_/CON (HAxp5_ASAP7_75t_R)
+  48.81  353.86 v _766561_/Y (OAI21x1_ASAP7_75t_R)
+  40.39  394.25 ^ _766723_/Y (NOR3x1_ASAP7_75t_R)
+  61.25  455.50 ^ _766752_/Y (AND3x1_ASAP7_75t_R)
+  53.10  508.60 ^ _766753_/Y (BUFx2_ASAP7_75t_R)
+  48.38  556.98 ^ _766759_/Y (AND4x1_ASAP7_75t_R)
+   0.00  556.98 ^ m_1h[25]$_DFFE_PN0P_/D (DFFASRHQNx1_ASAP7_75t_R)
+         556.98   data arrival time
+
+ 900.00  900.00   clock clk (rise edge)
+   0.00  900.00   clock network delay (ideal)
+-150.00  750.00   clock uncertainty
+   0.00  750.00   clock reconvergence pessimism
+         750.00 ^ m_1h[25]$_DFFE_PN0P_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+ -36.26  713.74   library setup time
+         713.74   data required time
+---------------------------------------------------------
+         713.74   data required time
+        -556.98   data arrival time
+---------------------------------------------------------
+         156.76   slack (MET)
+
+
+Warning 349: ab_sta.tcl line 1, instance 'mem_(ce|we)\[.*' not found.
+Warning 366: ab_sta.tcl line 1, port 'mem_(ce|we)\[.*' not found.
+==== main : stage ctrl->mem_ce_port : NO CELLS (from 106, to 0) ====
+==== main : DONE ====
+== sta exit 0
