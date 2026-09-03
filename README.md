@@ -1,5 +1,7 @@
 # N7+ + DCG + PTPX — IMG_FILTER 交付与官方评分环境复现
 
+[![ci](https://github.com/stevenchen0830/n7plus-dcg-ptpx/actions/workflows/ci.yml/badge.svg)](https://github.com/stevenchen0830/n7plus-dcg-ptpx/actions/workflows/ci.yml)
+
 > 49 抽头垂直 FIR 图像滤波器（RGBA10，4 像素/拍，`blk_v` = 1～49，边界镜像，
 > 49 片外部单端口 SRAM）按题目交付形态整理，并把题目指定的
 > **N7+ / H240 / ssgnp 0.675 V 125 ℃ / DCG 1 GHz / PTPX** 评分条件写成可直接运行的脚本。
