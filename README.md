@@ -1,5 +1,12 @@
 # N7+ + DCG + PTPX — IMG_FILTER 交付与官方评分环境复现
 
+> **mac4 分支：时序兜底版本，不是默认交付。** 与 `main` 唯一的区别是 MAC 从三级改为四级
+> 流水：每个 10×8 乘法拆成两个 10×4 半乘先寄存，再做对加、部分和、总和。ASAP7 慢角综合级
+> A/B（[docs/asap7_ab.md](docs/asap7_ab.md)）：最差路径 1,308 → 983 ps（−25 %），面积 +24 %，
+> +22.8 k 触发器，+1 拍延时。只有当官方 DCG 报出的负 slack 造成的损失大于面积项的约 4 分
+> （slack 差于约 −200 ps）时才值得用这个分支重交；先试零代价的 `DCG_RETIME_MAC=1`。
+> 本分支的验证日志在 `verification/logs/`，与 `main` 同一套 testbench。
+
 [![ci](https://github.com/stevenchen0830/n7plus-dcg-ptpx/actions/workflows/ci.yml/badge.svg)](https://github.com/stevenchen0830/n7plus-dcg-ptpx/actions/workflows/ci.yml)
 
 > 49 抽头垂直 FIR 图像滤波器（RGBA10，4 像素/拍，`blk_v` = 1～49，边界镜像，
@@ -47,14 +54,14 @@ docs/                requirements_checklist.md 逐项核对 · ppa_status.md PPA
 | 13 帧 smoke（`+SMOKE`） | 13 帧 / 42,972 次分量比对 / 0 错误 | `verification/logs/smoke.log` |
 | `blk_v` = 27 / 31 / 37 / 45 定向（`+BLKV_GAP`） | 8 帧 / 42,072 次比对 / 0 错误 | `verification/logs/blkv_gap.log` |
 | 全部合法 `blk_v` 1…49，各 2 帧（`+ALL_BLKV`） | 50 帧 / 233,024 次比对 / 0 错误，覆盖掩码 `2AAAAAAAAAAAA` | `verification/logs/all_blkv.log` |
-| 完整发布回归（54 帧 + 8 帧 gap，含 1440 宽、4096 高、随机扫描） | 运行中（提交时已完成 4 帧，0 错误；日志随后更新） | `verification/logs/full.log` |
-| 性能 / 功耗用例 A（1440×24，blk_v=5） | 9383 拍，41,760 次 SRAM 访存 | `verification/logs/case_a.log` |
-| 功耗用例 B（1440×24，blk_v=3） | 9023 拍，25,560 次访存 | `verification/logs/case_b.log` |
+| 完整发布回归（54 帧 + 8 帧 gap，含 1440 宽、4096 高、随机扫描） | 未在本分支运行（`main` 分支有） | — |
+| 性能 / 功耗用例 A（1440×24，blk_v=5） | 9,384 拍（比 `main` 多 1 拍），41,760 次 SRAM 访存 | `verification/logs/case_a.log` |
+| 功耗用例 B（1440×24，blk_v=3） | 未在本分支运行 | — |
 | Python 参考模型：题目公式 vs 权重旋转架构，117 组形状×核 | ALL REFERENCE CHECKS PASSED | `verification/logs/reference_model.log` |
 | 分裂旋转器 0…48 全移位量 | 3234 checks / 0 errors | `verification/logs/rotator_tb.log` |
 | REG_IN / REG_OUT 结构检查（Yosys 网表逐位遍历） | PASSED：6 个受约束输入的每一位只到触发器 D 端；`out_pix_data` 160 位全由 Q 端驱动 | `scripts/logs/check_reg_io.log` |
-| 无 latch / 无推断 memory | 断言通过；22,498 个触发器，470,032 个通用门 | `scripts/logs/synth_check_stat.txt` |
-| 寄存器间逻辑深度 | 28 级通用门（MAC 第一级） | `scripts/logs/depth_ltp.txt` |
+| 无 latch / 无推断 memory | 断言通过；44,899 个触发器，536,794 个通用门 | `scripts/logs/synth_check_stat.txt` |
+| 寄存器间逻辑深度 | 27 级通用门（对乘法器不敏感，见 `docs/asap7_ab.md`） | `scripts/logs/depth_ltp.txt` |
 | Verilator lint | 无警告 | `scripts/logs/verilator_lint.log` |
 
 每个仿真日志开头都记录了 RTL 与 TB 的 SHA-256 前缀，所有日志对应同一份 RTL。
@@ -98,7 +105,7 @@ ASAP7 慢角 A/B：最差路径 −25 %、面积 +24 %，见 [docs/asap7_ab.md](
 ========================================================================
 IMG_FILTER score sheet   (MEM_NUM=49, MEM_DWTH=160)
 ========================================================================
-Tx         9383000 ps  (thr 11000000)  PASS  score 30.37/30   [assumes DCG closes 1 GHz (no WNS given)]
+Tx         9384000 ps  (thr 11000000)  PASS  score 30.37/30   [assumes DCG closes 1 GHz (no WNS given)]
 PAx   PENDING  (needs PTPX, syn/ptpx/run_ptpx.tcl)
 PBx   PENDING  (needs PTPX, syn/ptpx/run_ptpx.tcl)
 Ax    PENDING  (needs DCG, syn/dcg/run_dcg.tcl)
@@ -133,7 +140,7 @@ sh scripts/run_sim.sh ALL_BLKV                   # 25 个 blk_v × 2 帧
 sh scripts/run_sim.sh FULL                       # 完整回归，数小时
 sh scripts/run_sim.sh CASE_A                     # 性能用例拍数与访存；VCD=case_A.vcd 可输出活动文件
 sh scripts/run_yosys_checks.sh                   # REG_IN/REG_OUT、无 latch/memory、逻辑深度
-python3 scripts/score.py --cycles 9383 --mp-accesses 41760
+python3 scripts/score.py --cycles 9384 --mp-accesses 41760
 ```
 
 工具：Icarus Verilog 11 / Verilator 4.038（WSL2 Ubuntu 22.04）、Yosys 0.68；

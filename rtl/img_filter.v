@@ -44,8 +44,11 @@
 //  Read enables are derived from C: a zero weight is never fetched, so the
 //  external memory access count scales with blk_v, not with MEM_NUM.
 //
-//  Timing     : accept -> mem -> rdata -> MAC1 -> MAC2 -> MAC3 -> out (6 cyc),
-//               plus (blk_v-1)/2 row times of algorithmic fill latency.
+//  Timing     : accept -> mem -> rdata -> MAC1 -> MAC2 -> MAC3 -> MAC4 -> out
+//               (7 cyc), plus (blk_v-1)/2 row times of algorithmic fill
+//               latency.  mac4 branch: timing fallback - each 10 x 8 product
+//               is formed as two 10 x 4 partial products that are registered
+//               before being recombined (one extra MAC stage).
 //  Throughput : one 4 pixel beat per cycle for every legal blk_v.
 //  REG_IN     : in_pix_data, mem_rdata, img_width, img_height, blk_v, coef
 //               all drive flip-flops directly and nothing else (checked
@@ -85,12 +88,18 @@ module IMG_FILTER (
     localparam DW    = 160;  // bank width
     localparam CW    = 392;  // NBK * 8 : packed weight vector
     localparam NTAP  = 50;   // 49 memory taps + 1 forwarded tap
-    // Three-stage MAC.  Two balanced stages measured ~35 logic levels each
-    // (1.18 ns at the SS corner), so the array is cut three ways instead:
-    // 25 pair-products (multiply + one add), 5 partial sums of 5 pairs, and
-    // a final sum + round + saturate stage, at roughly 24/23/20 levels.
-    localparam NPAIR = 25;   // 50 taps as 25 multiply-add pairs
+    // Four-stage MAC (mac4 timing-fallback branch).  The main branch cuts
+    // the array three ways: 25 pair products (multiply + one add), 5 partial
+    // sums, final sum + round + saturate; the deepest stage is the 10 x 8
+    // multiply-add.  Simply registering the 18-bit products gains almost
+    // nothing (the multiplier alone is as deep as multiply-add), so the
+    // multiplier itself is split: stage 1 forms two 10 x 4 partial products
+    // per tap (coefficient low / high nibble) and registers them, stage 2
+    // recombines lo + (hi << 4) for both taps of a pair.  Cost: 16 x 50 x 28
+    // bit of extra pipeline registers and one more cycle of latency.
+    localparam NPAIR = 25;   // 50 taps as 25 pairs
     localparam NPART = 5;    // 5 partial sums of 5 pairs each
+    localparam PPW   = 14;   // partial product width: 10 bit x 4 bit
     localparam ACCW  = 20;   // accumulator width
 
     localparam S_IDLE  = 3'd0;
@@ -544,7 +553,7 @@ module IMG_FILTER (
     reg [CW-1:0]     c_d1,  c_d2;
     reg [7:0]        cbp_d1, cbp_d2;
     reg [DW-1:0]     byp_d1, byp_d2;
-    reg              out_d1, out_d2, out_d3, out_d4;
+    reg              out_d1, out_d2, out_d3, out_d4, out_d5;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -554,6 +563,7 @@ module IMG_FILTER (
             out_d2 <= 1'b0;
             out_d3 <= 1'b0;
             out_d4 <= 1'b0;
+            out_d5 <= 1'b0;
         end else if (pipe_en) begin
             ce_d1  <= m_ce;
             ce_d2  <= ce_d1;
@@ -561,6 +571,7 @@ module IMG_FILTER (
             out_d2 <= out_d1;
             out_d3 <= out_d2;
             out_d4 <= out_d3;
+            out_d5 <= out_d4;
         end
     end
 
@@ -593,29 +604,48 @@ module IMG_FILTER (
     assign tapd[NBK*DW +: DW] = (|cbp_d2) ? byp_d2 : {DW{1'b0}};
     assign tapc[NBK*8  +: 8 ] = cbp_d2;
 
-    // Stage 1 (valid at out_d2): 25 pair products per lane.
-    // Stage 2 (valid at out_d3): 5 partial sums of 5 pairs.
-    // Stage 3 (valid at out_d4): total, +64, >>7, saturate.
+    // Stage 1 (valid at out_d2): 100 partial products per lane (10 x 4).
+    // Stage 2 (valid at out_d3): 25 pair sums, lo + (hi << 4) of both taps.
+    // Stage 3 (valid at out_d4): 5 partial sums of 5 pairs.
+    // Stage 4 (valid at out_d5): total, +64, >>7, saturate.
     // With legal coefficients every intermediate value is bounded by the
     // final total (all terms non-negative, sum of weights = 128), so ACCW
-    // covers each stage.
+    // covers each stage; a partial product never exceeds 1023 x 15 < 2^14.
+    reg  [PPW-1:0]  pplo_q [0:15][0:NTAP-1];   // data x coef[3:0]
+    reg  [PPW-1:0]  pphi_q [0:15][0:NTAP-1];   // data x coef[7:4]
     reg  [ACCW-1:0] pair_q [0:15][0:NPAIR-1];
     reg  [ACCW-1:0] part_q [0:15][0:NPART-1];
     wire [ACCW-1:0] total  [0:15];
     wire [12:0]     rndv   [0:15];
     wire [159:0]    result;
 
-    genvar gl, gp;
+    genvar gl, gp, gt;
     generate
         for (gl = 0; gl < 16; gl = gl + 1) begin : G_LANE
-            for (gp = 0; gp < NPAIR; gp = gp + 1) begin : G_PAIR
-                wire [ACCW-1:0] pprod =
-                    ({{(ACCW-10){1'b0}}, tapd[(2*gp)*DW   + gl*10 +: 10]} *
-                     {{(ACCW-8){1'b0}},  tapc[(2*gp)*8         +: 8]}) +
-                    ({{(ACCW-10){1'b0}}, tapd[(2*gp+1)*DW + gl*10 +: 10]} *
-                     {{(ACCW-8){1'b0}},  tapc[(2*gp+1)*8       +: 8]});
+            for (gt = 0; gt < NTAP; gt = gt + 1) begin : G_PROD
+                wire [PPW-1:0] pplo =
+                    {{(PPW-10){1'b0}}, tapd[gt*DW + gl*10 +: 10]} *
+                    {{(PPW-4){1'b0}},  tapc[gt*8          +: 4]};
+                wire [PPW-1:0] pphi =
+                    {{(PPW-10){1'b0}}, tapd[gt*DW + gl*10 +: 10]} *
+                    {{(PPW-4){1'b0}},  tapc[gt*8 + 4      +: 4]};
                 always @(posedge clk)
-                    if (pipe_en & out_d2) pair_q[gl][gp] <= pprod;
+                    if (pipe_en & out_d2) begin
+                        pplo_q[gl][gt] <= pplo;
+                        pphi_q[gl][gt] <= pphi;
+                    end
+            end
+
+            for (gp = 0; gp < NPAIR; gp = gp + 1) begin : G_PAIR
+                // product = lo + (hi << 4); two taps recombined in one
+                // four-operand add
+                wire [ACCW-1:0] psum2 =
+                    ({{(ACCW-PPW){1'b0}},   pplo_q[gl][2*gp]} +
+                     {{(ACCW-PPW-4){1'b0}}, pphi_q[gl][2*gp],   4'd0}) +
+                    ({{(ACCW-PPW){1'b0}},   pplo_q[gl][2*gp+1]} +
+                     {{(ACCW-PPW-4){1'b0}}, pphi_q[gl][2*gp+1], 4'd0});
+                always @(posedge clk)
+                    if (pipe_en & out_d3) pair_q[gl][gp] <= psum2;
             end
 
             for (gp = 0; gp < NPART; gp = gp + 1) begin : G_PART
@@ -625,7 +655,7 @@ module IMG_FILTER (
                                           pair_q[gl][5*gp+3])) +
                                           pair_q[gl][5*gp+4];
                 always @(posedge clk)
-                    if (pipe_en & out_d3) part_q[gl][gp] <= psum5;
+                    if (pipe_en & out_d4) part_q[gl][gp] <= psum5;
             end
 
             assign total[gl] = ((part_q[gl][0] + part_q[gl][1]) +
@@ -647,7 +677,7 @@ module IMG_FILTER (
     // a push can never overflow.
     reg [159:0] oskid_d;
     wire opop  = out_v_q & out_pix_need;
-    wire opush = pipe_en & out_d4;
+    wire opush = pipe_en & out_d5;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

@@ -1,18 +1,18 @@
-== run_sim.sh BLKV_GAP  start 2026-09-03 10:02:49
-== rtl sha256: f68b6b1f90eb3b0f  tb sha256: d6848e5345d1827d
+== run_sim.sh BLKV_GAP  start 2026-09-03 11:06:16
+== rtl sha256: d95a696aac89152c  tb sha256: d6848e5345d1827d
 == Icarus Verilog version 11.0 (stable) ()
 == IMG_FILTER regression seed=0x12345678 ==
-    40x24   blk_v=27 gap= 0/0  :    393 cyc (ideal   240), rd=   4550 wr=   240, 1st out +152
-    30x60   blk_v=27 gap=10/10 :    698 cyc (ideal   480), rd=  11128 wr=   480, 1st out +132
-    36x31   blk_v=31 gap= 0/0  :    437 cyc (ideal   279), rd=   6345 wr=   279, 1st out +157
-    25x64   blk_v=31 gap=20/20 :    793 cyc (ideal   448), rd=  11865 wr=   448, 1st out +159
-    44x24   blk_v=37 gap= 0/0  :    485 cyc (ideal   264), rd=   5940 wr=   264, 1st out +221
-    32x52   blk_v=37 gap= 0/30 :    750 cyc (ideal   416), rd=  12384 wr=   416, 1st out +169
-    28x24   blk_v=45 gap= 0/0  :    345 cyc (ideal   168), rd=   3990 wr=   168, 1st out +176
-    33x50   blk_v=45 gap=30/0  :    846 cyc (ideal   450), rd=  15444 wr=   450, 1st out +308
+    40x24   blk_v=27 gap= 0/0  :    394 cyc (ideal   240), rd=   4550 wr=   240, 1st out +154
+    30x60   blk_v=27 gap=10/10 :    709 cyc (ideal   480), rd=  11128 wr=   480, 1st out +141
+    36x31   blk_v=31 gap= 0/0  :    438 cyc (ideal   279), rd=   6345 wr=   279, 1st out +159
+    25x64   blk_v=31 gap=20/20 :    787 cyc (ideal   448), rd=  11179 wr=   448, 1st out +164
+    44x24   blk_v=37 gap= 0/0  :    486 cyc (ideal   264), rd=   5940 wr=   264, 1st out +222
+    32x52   blk_v=37 gap= 0/30 :    750 cyc (ideal   416), rd=  12384 wr=   416, 1st out +167
+    28x24   blk_v=45 gap= 0/0  :    346 cyc (ideal   168), rd=   3990 wr=   168, 1st out +178
+    33x50   blk_v=45 gap=30/0  :    840 cyc (ideal   450), rd=  15444 wr=   450, 1st out +301
 == 8 frames, 42072 component checks, 0 errors, longest dead run 39 ==
 ALIGNMENT checks=16450 errors=0
 COVERAGE blk_v=0202088000000 width_mod4=7 bank_wrap_frames=4
 COVERAGE shifts s1=1ffffffffffff s2=1ffffffffffff s3=1ffffffffffff
 TEST PASSED
-== exit code 0  end 2026-09-03 10:25:22
+== exit code 0  end 2026-09-03 12:02:40

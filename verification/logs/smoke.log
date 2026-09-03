@@ -1,23 +1,23 @@
-== run_sim.sh SMOKE  start 2026-09-03 10:02:47
-== rtl sha256: f68b6b1f90eb3b0f  tb sha256: d6848e5345d1827d
+== run_sim.sh SMOKE  start 2026-09-03 10:53:39
+== rtl sha256: d95a696aac89152c  tb sha256: d6848e5345d1827d
 == Icarus Verilog version 11.0 (stable) ()
 == IMG_FILTER regression seed=0x12345678 ==
-    32x24   blk_v= 1 gap= 0/0  :    215 cyc (ideal   192), rd=      0 wr=     0, 1st out +22
-    32x24   blk_v= 3 gap= 0/0  :    223 cyc (ideal   192), rd=    376 wr=   192, 1st out +30
-    28x25   blk_v= 5 gap= 0/0  :    212 cyc (ideal   175), rd=    672 wr=   175, 1st out +36
-    26x24   blk_v= 7 gap= 0/0  :    212 cyc (ideal   168), rd=    945 wr=   168, 1st out +43
-    25x27   blk_v= 9 gap= 0/0  :    240 cyc (ideal   189), rd=   1400 wr=   189, 1st out +50
-    24x24   blk_v=49 gap= 0/0  :    311 cyc (ideal   144), rd=   3408 wr=   144, 1st out +167
-    24x25   blk_v=49 gap= 0/0  :    317 cyc (ideal   150), rd=   3708 wr=   150, 1st out +167
-    32x48   blk_v=49 gap= 0/0  :    599 cyc (ideal   384), rd=  13824 wr=   384, 1st out +215
-    24x30   blk_v=47 gap= 0/0  :    341 cyc (ideal   180), rd=   4938 wr=   180, 1st out +161
-    32x30   blk_v=25 gap=40/0  :    508 cyc (ideal   240), rd=   4608 wr=   240, 1st out +179
-    32x30   blk_v=25 gap= 0/40 :    473 cyc (ideal   240), rd=   4608 wr=   240, 1st out +120
-    40x32   blk_v=49 gap=30/30 :    830 cyc (ideal   320), rd=   9260 wr=   320, 1st out +378
-    24x24   blk_v=49 gap=60/60 :    707 cyc (ideal   144), rd=   3444 wr=   144, 1st out +393
-== 13 frames, 42972 component checks, 0 errors, longest dead run 40 ==
+    32x24   blk_v= 1 gap= 0/0  :    216 cyc (ideal   192), rd=      0 wr=     0, 1st out +24
+    32x24   blk_v= 3 gap= 0/0  :    224 cyc (ideal   192), rd=    376 wr=   192, 1st out +31
+    28x25   blk_v= 5 gap= 0/0  :    213 cyc (ideal   175), rd=    672 wr=   175, 1st out +38
+    26x24   blk_v= 7 gap= 0/0  :    213 cyc (ideal   168), rd=    945 wr=   168, 1st out +44
+    25x27   blk_v= 9 gap= 0/0  :    241 cyc (ideal   189), rd=   1400 wr=   189, 1st out +52
+    24x24   blk_v=49 gap= 0/0  :    312 cyc (ideal   144), rd=   3384 wr=   144, 1st out +168
+    24x25   blk_v=49 gap= 0/0  :    318 cyc (ideal   150), rd=   3744 wr=   150, 1st out +167
+    32x48   blk_v=49 gap= 0/0  :    600 cyc (ideal   384), rd=  13440 wr=   384, 1st out +216
+    24x30   blk_v=47 gap= 0/0  :    342 cyc (ideal   180), rd=   5022 wr=   180, 1st out +161
+    32x30   blk_v=25 gap=40/0  :    512 cyc (ideal   240), rd=   4608 wr=   240, 1st out +180
+    32x30   blk_v=25 gap= 0/40 :    472 cyc (ideal   240), rd=   4608 wr=   240, 1st out +121
+    40x32   blk_v=49 gap=30/30 :    833 cyc (ideal   320), rd=   9460 wr=   320, 1st out +378
+    24x24   blk_v=49 gap=60/60 :    700 cyc (ideal   144), rd=   3456 wr=   144, 1st out +384
+== 13 frames, 42972 component checks, 0 errors, longest dead run 39 ==
 ALIGNMENT checks=18350 errors=0
 COVERAGE blk_v=28000020002aa width_mod4=7 bank_wrap_frames=0
 COVERAGE shifts s1=1fffffeffffff s2=1fffffeffffff s3=1ffffffffffff
 TEST PASSED
-== exit code 0  end 2026-09-03 10:19:30
+== exit code 0  end 2026-09-03 11:39:53
